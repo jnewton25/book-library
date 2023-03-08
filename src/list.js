@@ -14,7 +14,11 @@ const List = () => {
 		},
 	];
 
-	return books.map((books) => <li>{books.name}</li>);
+	return books.map((books) => (
+		<li>
+			{books.name} - Author: {books.author}
+		</li>
+	));
 };
 
 export default List;
