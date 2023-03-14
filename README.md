@@ -12,3 +12,7 @@ Web library to save books you want to read, compile a list of books you have alr
 -   CSS
 
 ## Preview
+
+## Figma
+
+![figma-preview](https://user-images.githubusercontent.com/28316960/225123017-bbd3c56f-c6f1-4b1b-b44e-b01193af17a0.png)
