@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 const List = () => {
 	const books = [
@@ -22,11 +23,32 @@ const List = () => {
 		},
 	];
 
+	const apiUrl = "https://www.googleapis.com/books/v1/volumes";
+	const query = "q=isbn:9780780797086"; // replace ISBN_NUMBER with the actual ISBN of the book
+	const url = `${apiUrl}?${query}`;
+
+	axios
+		.get(url)
+		.then((response) => {
+			const title = response.data.items[0].volumeInfo.title;
+			console.log(title); // or update state with the title
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+
 	return books.map((books) => (
 		<li>
 			{books.name} - Author: {books.author} - Pages: {books.pages}
 		</li>
 	));
 };
+
+/* Example API search with Key
+
+https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyA4PySPsZegDKj4lyPojWBqSDEARYkCLBQ
+
+Key -> AIzaSyA4PySPsZegDKj4lyPojWBqSDEARYkCLBQ
+*/
 
 export default List;
