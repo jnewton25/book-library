@@ -24,7 +24,7 @@ const List = () => {
 	];
 
 	const apiUrl = "https://www.googleapis.com/books/v1/volumes";
-	const query = "q=isbn:9780780797086"; // replace ISBN_NUMBER with the actual ISBN of the book
+	const query = "q=intitle:Harry Potter"; // replace KEYWORDS with the actual keywords you want to search for
 	const url = `${apiUrl}?${query}`;
 
 	axios
@@ -32,6 +32,7 @@ const List = () => {
 		.then((response) => {
 			const title = response.data.items[0].volumeInfo.title;
 			console.log(title); // or update state with the title
+			alert(title);
 		})
 		.catch((error) => {
 			console.error(error);
@@ -48,7 +49,6 @@ const List = () => {
 
 https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyA4PySPsZegDKj4lyPojWBqSDEARYkCLBQ
 
-Key -> AIzaSyA4PySPsZegDKj4lyPojWBqSDEARYkCLBQ
 */
 
 export default List;
