@@ -1,8 +1,8 @@
-import React from "react";
+import { React, useState } from "react";
 import axios from "axios";
 
 const List = () => {
-	const books = [
+	let books = [
 		{
 			id: 0,
 			name: "The Terminal List",
@@ -23,26 +23,33 @@ const List = () => {
 		},
 	];
 
-	const apiUrl = "https://www.googleapis.com/books/v1/volumes";
-	const query = "q=intitle:Harry Potter"; // replace KEYWORDS with the actual keywords you want to search for
-	const url = `${apiUrl}?${query}`;
+	const [title, setTitle] = useState("");
+	const [keywords, setKeywords] = useState("");
 
-	axios
-		.get(url)
-		.then((response) => {
-			const title = response.data.items[0].volumeInfo.title;
-			console.log(title); // or update state with the title
-			alert(title);
-		})
-		.catch((error) => {
-			console.error(error);
-		});
+	const handleSearch = () => {
+		setKeywords(keywords);
+		const apiUrl = "https://www.googleapis.com/books/v1/volumes";
+		const query = `q=intitle:${keywords}`; // replace KEYWORDS with the actual keywords you want to search for
+		const url = `${apiUrl}?${query}`;
 
-	return books.map((books) => (
-		<li>
-			{books.name} - Author: {books.author} - Pages: {books.pages}
-		</li>
-	));
+		axios
+			.get(url)
+			.then((response) => {
+				const title = response.data.items[0].volumeInfo.title;
+				setTitle(title);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
+
+	return (
+		<div>
+			<input type="text" placeholder="Search for a book" />
+			<button onClick={handleSearch}>Search</button>
+			{title && <h2>{title}</h2>}
+		</div>
+	);
 };
 
 /* Example API search with Key
